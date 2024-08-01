@@ -7,8 +7,8 @@
 </head>
 <body>
     <script>
-
-       function getComputerChoice(){
+        //Originally this was a funtion expression(lesson learned on this)
+        let computerSelection = function() {
             let input = Math.floor(Math.random()*10)
             if(input < 3) {
                 let computerChoice = "rock";
@@ -25,7 +25,7 @@
         }
 
 
-        function getHumanChoice(){
+        let humanSelection = function() {
             let userInput = prompt("Choose your weapon! Rock, Paper or Sciccors?");
             let adjustedInput = userInput.toLowerCase();
             if (adjustedInput === "rock" || adjustedInput === "paper" || adjustedInput === "scissors") {
@@ -33,11 +33,12 @@
                 return humanChoice;
             }
             //force user to comply by looping function on self
-            else getHumanChoice()
+            else humanSelection
         }
-
+        function playGame() {
+                
         let humanScore = 0;
-        let computerScore = 0
+        let computerScore = 0;
 
         function playRound(humanChoice, computerChoice) {
             let resultOne = `You Win! ${humanChoice} beats ${computerChoice}!`;
@@ -72,52 +73,42 @@
             return console.log(resultThree);
             }
 
+
+
+
         }
 
+        playRound(humanSelection(), computerSelection());
+        console.log(`Your score is ${humanScore}`);
+        console.log(`Your opponent has ${computerScore}`);
+       
+        playRound(humanSelection(), computerSelection());
+        console.log(`Your score is ${humanScore}`);
+        console.log(`Your opponent has ${computerScore}`);
+
+        playRound(humanSelection(), computerSelection());
+        console.log(`Your score is ${humanScore}`);
+        console.log(`Your opponent has ${computerScore}`);
+
+        playRound(humanSelection(), computerSelection());
+        console.log(`Your score is ${humanScore}`);
+        console.log(`Your opponent has ${computerScore}`);
+        
+        playRound(humanSelection(), computerSelection());
+        if (humanScore > computerScore) {
+            return `You WIN! You had ${humanScore}, the console had ${computerScore}`;
+        }
+        else if (humanScore < computerScore) {
+            return `You LOSE! You had ${humanScore}, the console had ${computerScore}`;
+        }
+        else {
+            return `It is a TIE...You had ${humanScore}, the console had ${computerScore}`;
+        }
+
+    }
         // Will complete after I learn how to recall functions that have been called and
         // assigned a variable already how can I recall getHumanChoice and getComputerChoice
         // functions. All otheraspect work well at the moment
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-        let rounds = humanScore + computerScore;
-
-        playRound(humanSelection, computerSelection);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(rounds);
-        console.log(humanSelection);
-
-        getComputerChoice();
-        getHumanChoice();
-        playRound(humanSelection, computerSelection);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(rounds);
-        console.log(humanSelection);
-
-        getComputerChoice();
-        getHumanChoice();
-        playRound(humanSelection, computerSelection);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(rounds);
-        console.log(humanSelection);
-
-        getComputerChoice();
-        getHumanChoice();
-        playRound(humanSelection, computerSelection);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(rounds);
-        console.log(humanSelection);
-
-        getComputerChoice();
-        getHumanChoice();
-        playRound(humanSelection, computerSelection);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(rounds);
-        console.log(humanSelection);
 
     </script>
 </body>
