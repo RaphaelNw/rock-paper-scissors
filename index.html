@@ -6,7 +6,33 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="container">
+        <button id = "rock">Rock</button>
+        <button id = "paper">Paper</button>
+        <button id = "scissors">Scissors</button>
+    </div>
+    <div class="result">
+
+    </div>
     <script>
+
+        const rockButton = document.querySelector("#rock");
+        const paperButton = document.querySelector("#paper");
+        const scissorsButton = document.querySelector("#scissors");
+        const resultDiv = document.querySelector(".result")
+
+
+        let humanSelection = function() {
+            let userInput = prompt("Choose your weapon! Rock, Paper or Sciccors?");
+            let adjustedInput = userInput.toLowerCase();
+            if (adjustedInput === "rock" || adjustedInput === "paper" || adjustedInput === "scissors") {
+                let humanChoice = adjustedInput
+                return humanChoice;
+            }
+            //force user to comply by looping function on self
+            else humanSelection
+        }
+
         //Originally this was a funtion expression(lesson learned on this)
         let computerSelection = function() {
             let input = Math.floor(Math.random()*10)
@@ -24,60 +50,98 @@
             }
         }
 
-
-        let humanSelection = function() {
-            let userInput = prompt("Choose your weapon! Rock, Paper or Sciccors?");
-            let adjustedInput = userInput.toLowerCase();
-            if (adjustedInput === "rock" || adjustedInput === "paper" || adjustedInput === "scissors") {
-                let humanChoice = adjustedInput
-                return humanChoice;
-            }
-            //force user to comply by looping function on self
-            else humanSelection
-        }
-        function playGame() {
+        // function playGame() {
                 
         let humanScore = 0;
         let computerScore = 0;
 
         function playRound(humanChoice, computerChoice) {
-            let resultOne = `You Win! ${humanChoice} beats ${computerChoice}!`;
-            let resultTwo = `You Lose! ${computerChoice} beats ${humanChoice}!`;
-            let resultThree = `A Tie! ${humanChoice} stalemates ${computerChoice}`;
+            let resultOne = `You Win! ${humanChoice} beats ${computerChoice}!
+                                You have ${humanScore} points, the console has ${computerScore} points.`;
+            let resultTwo = `You Lose! ${computerChoice} beats ${humanChoice}!
+                                You have ${humanScore} points, the console has ${computerScore} points.`;
+            let resultThree = `A Tie! ${humanChoice} stalemates ${computerChoice}
+                                You have ${humanScore} points, the console has ${computerScore} points`;
                 
             if (humanChoice == "rock" && computerChoice == "scissors"){
-                humanScore++
-                return console.log(resultOne);
+                const p = document.createElement('p');
+                p.textContent = resultOne;
+                humanScore++;
+                resultDiv.appendChild(p);
             }
             else if (humanChoice == "rock" && computerChoice == "paper"){
-                computerScore++
-                return console.log(resultTwo);
+                const p = document.createElement('p');
+                p.textContent = resultTwo;
+                computerScore++;
+                resultDiv.appendChild(p);
             }
             else if (humanChoice == "scissors" && computerChoice == "paper"){
-                humanScore++
-                return console.log(resultOne);
+                const p = document.createElement('p');
+                p.textContent = resultOne;
+                humanScore++;
+                resultDiv.appendChild(p);
             }
             else if (humanChoice == "scissors" && computerChoice == "rock"){
-                computerScore++
-                return console.log(resultTwo);
+                const p = document.createElement('p');
+                p.textContent = resultTwo;
+                computerScore++;
+                resultDiv.appendChild(p);
             }
             else if (humanChoice == "paper" && computerChoice == "rock"){
-                humanScore++
-                return console.log(resultOne);
+                const p = document.createElement('p');
+                p.textContent = resultOne;
+                humanScore++;
+                resultDiv.appendChild(p);
             }
             else if (humanChoice == "paper" && computerChoice == "scissors"){
-                computerScore++
-                return console.log(resultTwo);
+                const p = document.createElement('p');
+                p.textContent = resultTwo;
+                computerScore++;
+                resultDiv.appendChild(p);
             }
             else if (humanChoice == computerChoice) {
-            return console.log(resultThree);
+                const p = document.createElement('p');
+                p.textContent = resultThree;
+                resultDiv.appendChild(p);
             }
-
-
-
-
         }
 
+        function whoWins(humanScore, computerScore) {
+        if (humanScore == 5 || computerScore == 5 && humanScore > computerScore) {
+            const h2 = document.createElement('h2');
+            h2.textContent =  `You WIN! You had ${humanScore}, the console had ${computerScore}`;
+            resultDiv.appendChild(h2);
+        }
+        else if (humanScore == 5 || computerScore == 5 && humanScore < computerScore) {
+            const h2 = document.createElement('h2');
+            h2.textContent = `You LOSE! You had ${humanScore}, the console had ${computerScore}`;
+            resultDiv.appendChild(h2);
+        }
+    }
+
+        rockButton.addEventListener("click", function(e) {
+            const compChose = computerSelection();
+            const humanChose = "rock";
+            playRound(humanChose, compChose);
+            whoWins(humanScore, computerScore);
+        });
+
+        paperButton.addEventListener("click", function(e) {
+            const compChose = computerSelection();
+            const humanChose = "paper";
+            playRound(humanChose, compChose);
+            whoWins(humanScore, computerScore);
+        });
+
+        scissorsButton.addEventListener("click", function(e) {
+            const compChose = computerSelection();
+            const humanChose = "scissors";
+            playRound(humanChose, compChose);
+            whoWins(humanScore, computerScore);
+        });
+
+    
+/*
         playRound(humanSelection(), computerSelection());
         console.log(`Your score is ${humanScore}`);
         console.log(`Your opponent has ${computerScore}`);
@@ -105,11 +169,11 @@
             return `It is a TIE...You had ${humanScore}, the console had ${computerScore}`;
         }
 
-    }
+   // }
         // Will complete after I learn how to recall functions that have been called and
         // assigned a variable already how can I recall getHumanChoice and getComputerChoice
         // functions. All otheraspect work well at the moment
-
+*/
     </script>
 </body>
 </html>
